@@ -7,16 +7,43 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.rest.jersey.pojo.Student;
+import org.springframework.stereotype.Component;
 
-@Path("/hello")
-public class HelloWorldService {
+import com.rest.jersey.bo.StockBoImpl;
+import com.rest.jersey.model.Stock;
+import com.rest.jersey.pojo.Student;
+import com.sun.jersey.api.core.InjectParam;
+
+@Component
+@Path("/stockService")
+public class StockRest {
  
+	@InjectParam
+	StockBoImpl stockBo;
+	
+	
 	@GET
-	@Path("/{param}")
-	public Response getMsg(@PathParam("param") String msg) {
+	@Path("/find/{param}")
+	public Response find(@PathParam("param") String msg) {
  
-		String output = "Jersey say : " + msg;
+		Stock stock = stockBo.findByStockCode(msg);
+		
+		String output = stock != null ? stock.getStockName() : "stock not found";
+ 
+		return Response.status(200).entity(output).build();
+ 
+	}
+	
+	@GET
+	@Path("/insert/{param1}/{param2}")
+	public Response insert(@PathParam("param1") String stockCode, @PathParam("param2") String stockName) {
+ 
+		Stock stock = new Stock();
+		stock.setStockCode(stockCode);
+		stock.setStockName(stockName);
+		stockBo.save(stock);
+		
+		String output = stock != null ? "id stock:"+stock.getStockId() : "stock not found";
  
 		return Response.status(200).entity(output).build();
  
@@ -32,4 +59,5 @@ public class HelloWorldService {
 		return st;
 
 	}
+	
 }
