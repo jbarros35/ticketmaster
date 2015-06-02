@@ -1,10 +1,11 @@
 <ul class="nav navbar-nav navbar-right">
+  <li><a ng-href="#login">Login</a></li>
+  <li><a ng-href="#" ng-click="logout()">Logout</a></li>
 	<li ng-repeat="item in items" ng-class="{'dropdown': item.submenu != null}">
-		
 		<a href="{{item.url}}" ng-if="item.submenu != null" data-toggle="dropdown" class="dropdown-toggle">
 		{{item.text}}
 		<b ng-show="item.submenu" class="caret"></b></a>
-		<a href="{{item.url}}" ng-if="item.submenu == null">{{item.text}}</a>						
+		<a href="{{item.url}}" ng-if="item.submenu == null">{{item.text}}</a>
 		<ul ng-show="item.submenu" class="dropdown-menu">
 			<li ng-repeat="sub in item.submenu">
 				<a href="{{sub.url}}">{{sub.text}}</a>
