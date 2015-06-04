@@ -1,7 +1,8 @@
 (function() {//"shared", "mainHome", "mainLogin",
   var app = angular.module("main", ["auth0",
                                     "ngRoute","shared",
-                                    "angular-storage", "angular-jwt"]);
+                                    "angular-storage", "angular-jwt", 
+                                    "login"]);
 
   app.run(function($location, $rootElement,$rootScope, auth, store, jwtHelper) {
 	  // fix for carousel function.
@@ -12,7 +13,7 @@
 		      var token = store.get('token');
 		      if (token) {
 		        if (!jwtHelper.isTokenExpired(token)) {
-		        	console.log('token ok');
+		        	console.log('token '+token);
 		          auth.authenticate(store.get('profile'), token);
 		        } else {
 		        	console.log('token expired');
@@ -89,22 +90,9 @@
   app.controller('RouteCtrl', function($scope) {
 
    /** create $scope.template **/
-   $scope.template={
+   $scope.template={};
 
-     "home":"js/common/home.html",
-     "about":"aboutus.html",
-     "contact":"contactus.html"
-
-   };
-
-   $scope.message={
-
-     "home":"Message from home template",
-     "about":"Message from about template",
-     "contact":"Message from contact template"
-
-   };
-
+   $scope.message={};
 
    /** now after this ng-include in uirouter.html set and take template from their respective path **/
 
@@ -117,27 +105,5 @@
 		    }
 		  });
 		});
-
-  app.controller( 'LoginCtrl', function HomeController( $scope, auth, $location, store ) {
-
-	  $scope.login = function() {
-	    auth.signin({}, function(profile, token) {
-	      store.set('profile', profile);
-	      store.set('token', token);
-	      $scope.profile = profile;
-	      console.log(store.get('profile'));
-	      $location.path("/");
-	    }, function(error) {
-	      console.log("There was an error logging in", error);
-	    });
-	  };
-
-	  $scope.logout = function() {
-		  console.logout('logout invoked');
-		    auth.signout();
-		    store.remove('profile');
-		    store.remove('token');
-		    $location.path('/login');
-		  };
-	});
+ 
 })();

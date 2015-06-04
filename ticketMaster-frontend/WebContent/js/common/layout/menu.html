@@ -1,15 +1,23 @@
-<ul class="nav navbar-nav navbar-right">
-  <li><a ng-href="#login">Login</a></li>
-  <li><a ng-href="#" ng-click="logout()">Logout</a></li>
+<ul class="nav navbar-nav navbar-right">  
+  <li><a ng-href="#login" ng-if="!profile">Login</a></li>
+  <li><a ng-href="#" ng-if="profile" ng-click="logout()">Logout</a></li>
 	<li ng-repeat="item in items" ng-class="{'dropdown': item.submenu != null}">
+		<!-- menu with sub items -->
 		<a href="{{item.url}}" ng-if="item.submenu != null" data-toggle="dropdown" class="dropdown-toggle">
 		{{item.text}}
 		<b ng-show="item.submenu" class="caret"></b></a>
+		<!--  normal menu -->
 		<a href="{{item.url}}" ng-if="item.submenu == null">{{item.text}}</a>
+		
 		<ul ng-show="item.submenu" class="dropdown-menu">
 			<li ng-repeat="sub in item.submenu">
 				<a href="{{sub.url}}">{{sub.text}}</a>
 			</li>
 		</ul>
+	</li>
+	<li ng-if="profile">
+  		<a href="#user" class="small" style="padding-top:10px;padding-bottom:0px">
+			<img src="{{profile.picture}}" ng-if="profile" class="img-circle" alt="{{profile.name}}" width="30" height="30">
+		</a>					
 	</li>
 </ul>
