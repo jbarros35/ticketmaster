@@ -3,6 +3,7 @@ package com.ticketmaster.model;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,9 +15,6 @@ import javax.persistence.Table;
 @Table(name = "EVENT")
 public class Event  implements Serializable {
 
-	/**
-	 * "EVENT_ID", "TITLE", "IMG_SRC", "ACTIVE", "SHORT_DESCRIPTION"
-	 */
 	private static final long serialVersionUID = 7014943291744622322L;
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -30,6 +28,10 @@ public class Event  implements Serializable {
 	private Boolean active;
 	@Column(name = "SHORT_DESCRIPTION", unique = false, nullable = true, length = 255)
 	private String shortDescription;
+	@Column(name = "\"DATA_INI\"", unique = false, nullable = true)
+	private Date dataIni;
+	@Column(name = "\"DATA_FIN\"", unique = false, nullable = true)
+	private Date dataFin;
 	public Long getEventId() {
 		return eventId;
 	}
@@ -59,6 +61,19 @@ public class Event  implements Serializable {
 	}
 	public void setShortDescription(String shortDescription) {
 		this.shortDescription = shortDescription;
+	}
+	
+	public Date getDataIni() {
+		return dataIni;
+	}
+	public void setDataIni(Date dataIni) {
+		this.dataIni = dataIni;
+	}
+	public Date getDataFin() {
+		return dataFin;
+	}
+	public void setDataFin(Date dataFin) {
+		this.dataFin = dataFin;
 	}
 	@Override
 	public int hashCode() {

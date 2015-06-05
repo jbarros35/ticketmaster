@@ -7,5 +7,6 @@ import com.ticketmaster.model.Event;
 public interface EventDao {
  	
 	public List<Event> getHighlights();
+	public List<Event> getIncomingEvents();
  
 }

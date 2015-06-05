@@ -40,6 +40,14 @@ public class LayoutRest {
 		List<Event> events = eventDao.getHighlights();
 		return events;
 	}	
+	
+	@GET
+	@Path("/getIncomingEvents")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Event> getIncomingEvents() {
+		List<Event> events = eventDao.getIncomingEvents();
+		return events;
+	}	
 
 	public MenuDao getMenuDao() {
 		return menuDao;
