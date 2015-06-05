@@ -32,14 +32,15 @@
 			templateUrl: "js/common/layout/portfolio.html",
 			controller: ['$scope', '$http', '$filter', function ($scope, $http, $filter) {
 				$http.defaults.useXDomain = true;
-				/*$http.get('http://localhost:8080/cors/json/incomingEvents.json').
+				$http.get(SERVICESURL+'layout/getIncomingEvents').
 				success(function(data, status, headers, config) {
+					console.log(data);
 				  $scope.events = data;
 			   }).
 				error(function(data, status, headers, config) {
 				  // log error
 				  console.log("Error "+data);
-				});*/
+				});
 			}]
 		}
 	});
