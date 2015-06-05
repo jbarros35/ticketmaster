@@ -1,8 +1,8 @@
 (function() {//"shared", "mainHome", "mainLogin",
   var app = angular.module("main", ["auth0",
                                     "ngRoute","shared",
-                                    "angular-storage", "angular-jwt", 
-                                    "login"]);
+                                    "angular-storage", "angular-jwt",
+                                    "login", "event"]);
 
   app.run(function($location, $rootElement,$rootScope, auth, store, jwtHelper) {
 	  // fix for carousel function.
@@ -65,6 +65,13 @@
           templateUrl: 'js/user/index.html',
           requiresLogin: true
       })
+      // event detail page
+      /*.when( '/viewEvent/:eventId', {
+	      controller: 'EventCtrl',
+	      templateUrl: 'js/event/viewEvent.html',
+	      pageTitle: 'Event',
+	      requiresLogin: false
+      })*/
       // if not match with any route config then send to home page
        .otherwise({
           redirectTo: '/404'
@@ -105,5 +112,5 @@
 		    }
 		  });
 		});
- 
+
 })();
